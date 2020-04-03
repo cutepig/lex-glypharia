@@ -2,24 +2,17 @@
   "name": "lex-glypharia",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@types/jest": "24.0.21",
-    "@types/node": "12.12.5",
-    "@types/react": "16.9.11",
-    "@types/react-dom": "16.9.3",
-    "immer": "5.0.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-redux": "7.1.1",
-    "react-scripts": "3.2.0",
-    "redux": "4.0.4",
-    "typescript": "3.6.4"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "database:build": "node contrib/databaseBuilder/databaseBuilder.mjs contrib/databases/gardiner/Gardinerall.csv contrib/databases/kamrin_34-38-67-69_michele/* contrib/databases/kamrin_chapers_1-2/* contrib/databases/kamrin_pages_31-128_luca/* contrib/databases/kamrin_titles/* 'contrib/databases/Allen Lessons 1-8.hwd' 'contrib/databases/Biliterals in English.hrw' 'contrib/databases/Collier&Manley.hrw' 'contrib/databases/Hoch 1-2.hwd' 'contrib/databases/Mark Vygus.hrw' 'contrib/databases/Triliterals in English.hrw'",
+    "glyphmap:build": "node contrib/glyphMapBuilder/glyphMapBuilder.mjs"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "all"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,7 +29,23 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "immer": "5.0.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "rxjs": "6.5.5"
+  },
   "devDependencies": {
-    "@types/react-redux": "7.1.5"
+    "@types/cheerio": "0.22.17",
+    "@types/jest": "24.0.21",
+    "@types/node": "13.11.0",
+    "@types/node-fetch": "2.5.5",
+    "@types/react": "16.9.32",
+    "@types/react-dom": "16.9.6",
+    "cheerio": "1.0.0-rc.3",
+    "csv-parse": "4.8.8",
+    "node-fetch": "2.6.0",
+    "react-scripts": "3.4.1",
+    "typescript": "3.8.3"
   }
 }

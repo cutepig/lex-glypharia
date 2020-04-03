@@ -1,0 +1,62 @@
+.GlyphDoodle-top {
+  display: flex;
+  justify-content: stretch;
+  align-content: stretch;
+}
+
+.GlyphDoodle-bottom {
+  display: flex;
+  overflow: hidden;
+  /* App header is 3rem tall */
+  height: calc(50vh - 1.5rem);
+}
+.GlyphDoodle-glyphs,
+.GlyphDoodle-notes {
+  flex: 0 0 50%;
+  max-width: 50%;
+  margin: 0;
+  /* App header is 3rem tall */
+  height: calc(50vh - 1.5rem);
+}
+
+.GlyphDoodle-glyphs textarea,
+.GlyphDoodle-notes textarea {
+  min-width: 100%;
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0 1rem;
+  font-family: inherit;
+}
+
+.GlyphDoodle-glyphs textarea {
+  font-size: 1.25rem;
+  letter-spacing: 0.1rem;
+}
+
+.GlyphDoodle-notes textarea {
+}
+
+.GlyphDoodle-keyboard,
+.GlyphDoodle-matches {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.GlyphDoodle-matches > ul {
+  min-height: 100%;
+  margin: 0;
+  padding: 1rem;
+  padding-inline-start: 2rem;
+  list-style-type: decimal;
+  background: var(--color-light-primary);
+  color: var(--color-dark-primary);
+}
+
+.GlyphDoodle-matches > ul li::marker {
+  font-size: 0.8rem;
+}

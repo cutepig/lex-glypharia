@@ -1,13 +1,43 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosansegyptianhieroglyphs.css);
+
+:root {
+  /* Colors via https://cloudflare.design/color/ with #502b5a as seed */
+  --color-dr-white: #faf9fa;
+  --color-crystal-bell: #eeedef;
+  --color-jupiter: #e2e0e3;
+  --color-jam-session: #d5d2d6;
+  --color-haze: #c6c2c8;
+  --color-silver-bullet: #b6b1b8;
+  --color-silver-sconce: #a49ea6;
+  --color-purple-ash: #8e8691;
+  --color-rum: #736976;
+  --color-funkie-friday: #483b4c;
+  --color-dr-white: #faf9fa;
+  --color-crystal-bell: #eeedf1;
+  --color-minified-purple: #e2e0e7;
+  --color-frosted-lilac: #d4d1dc;
+  --color-femininity: #c6c2cf;
+  --color-dreamland: #b5b1c2;
+  --color-lazy-lavender: #a39db2;
+  --color-antiquate: #8d85a0;
+  --color-aromatic: #706789;
+  --color-mulberry-purple: #443864;
+
+  --color-light-primary: var(--color-crystal-bell);
+  --color-dark-primary: var(--color-mulberry-purple);
+
+  --color-light-secondary: var(--color-silver-bullet);
+  --color-dark-secondary: var(--color-aromatic);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-size: 16px;
+  font-family: "Noto Sans Egyptian Hieroglyphs", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
 }

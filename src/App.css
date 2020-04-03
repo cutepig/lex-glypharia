@@ -2,33 +2,25 @@
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: stretch;
   font-size: 16px;
-  background-color: #282c34;
-  text-align: center;
-  color: white;
+  background-color: var(--color-dark-secondary);
+  color: var(--color-light-primary);
 }
 
 .App-header {
-  padding: 4rem;
-  font-size: calc(10px + 2vmin);
+  display: flex;
+  height: 3rem;
+  padding: 0 1rem;
+  align-items: center;
+  background-color: var(--color-dark-primary);
+  color: var(--color-light-primary);
+}
+.App-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 .App-link {
   color: #09d3ac;
-}
-
-.Form {
-  padding: 4rem;
-  font-size: 1.25rem;
-}
-
-.Form label > span {
-  padding: 1rem;
-}
-
-.Form input {
-  padding: 0.5rem;
-  font-size: 1.25rem;
 }
