@@ -1,0 +1,52 @@
+.GlyphKeyboard {
+}
+
+/*
+.GlyphKeyboard-controls,
+.GlyphKeyboard-pages,
+.GlyphKeyboard-glyphs,
+.GlyphKeyboard-results
+*/
+.keymap {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1rem;
+  align-items: stretch;
+}
+
+/*
+.GlyphKeyboard-controls button
+.GlyphKeyboard-pages button
+*/
+.button {
+  display: block;
+  width: 3rem;
+  height: 1.5rem;
+  padding: 0.25rem;
+  border: 1px solid transparent;
+  background: var(--color-light-primary);
+  color: var(--color-dark-primary);
+  cursor: pointer;
+}
+
+.button:hover,
+.buttonActive {
+  border-color: var(--color-dark-secondary);
+}
+
+.glyphButton {
+  composes: button;
+  height: 2.5rem;
+  font-size: 1.2rem;
+}
+
+/* .GlyphKeyboard-controls input */
+.input {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border: 1px solid transparent;
+}

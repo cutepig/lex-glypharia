@@ -6,8 +6,8 @@ export function useProduce<T>(initialState: T) {
 
   function dispatch(fn: (state: Draft<T>, readOnlyState: Immutable<T>) => T | void) {
     let newState;
-    setState(_state => {
-      newState = produce(_state, draft => fn(draft, _state as Immutable<T>)) as T;
+    setState((_state) => {
+      newState = produce(_state, (draft) => fn(draft, _state as Immutable<T>)) as T;
       return newState;
     });
     return (newState as any) as T;

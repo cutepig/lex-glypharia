@@ -1,6 +1,7 @@
-import "./GlyphDoodle.css";
+import styles from "./GlyphDoodle.module.css";
 
 import React, { useEffect } from "react";
+import { cx } from "emotion";
 import { GlyphKeyboard } from "./GlyphKeyboard";
 import { Subject } from "rxjs";
 import { IGlyphTextArea, GlyphTextArea } from "./GlyphTextArea";
@@ -78,6 +79,8 @@ function restoreState(state: IGlyphDoodleState) {
   if (url.searchParams.has("doodle")) {
     state.doodle = Buffer.from(url.searchParams.get("doodle") || "", "base64").toString("utf-8");
     state.text = Buffer.from(url.searchParams.get("text") || "", "base64").toString("utf-8");
+    state.doodle && localStorage.setItem("doodle/doodle", state.doodle);
+    state.text && localStorage.setItem("doodle/text", state.text);
   } else {
     state.doodle = localStorage.getItem("doodle/doodle") || "";
     state.text = localStorage.getItem("doodle/text") || "";
@@ -121,7 +124,7 @@ export const GlyphDoodle: React.FC = () => {
   )}&text=${encodeURIComponent(Buffer.from(state.text, "utf-8").toString("base64"))}`;
 
   const onGlyphsChange: IGlyphTextArea["onChange"] = (value, meta) => {
-    dispatch(state => {
+    dispatch((state) => {
       // NOTE: We may want to store this as buffer
       // if we want to cache these, so that we can
       // index each actual character
@@ -140,14 +143,14 @@ export const GlyphDoodle: React.FC = () => {
     const text = state.text.substring(start, end).replace(/\s+/g, "");
     const entries = lookup(text);
 
-    dispatch(state => {
+    dispatch((state) => {
       state.matches = entries.reverse();
     });
   };
 
   const onNotesChange = (ev: React.SyntheticEvent<HTMLTextAreaElement>) => {
     const value = ev.currentTarget.value;
-    dispatch(state => {
+    dispatch((state) => {
       state.doodle = value;
       storeState(state);
     });
@@ -155,12 +158,13 @@ export const GlyphDoodle: React.FC = () => {
 
   useEffect(() => {
     dispatch(restoreState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="GlyphDoodle">
-      <div className="GlyphDoodle-top">
-        <div className="GlyphDoodle-glyphs">
+      <div className={styles.topArea}>
+        <div className={cx(styles.textareaPane, styles.glyphPane)}>
           <GlyphTextArea
             glyphStream={glyphStream}
             value={state.text}
@@ -169,17 +173,17 @@ export const GlyphDoodle: React.FC = () => {
           />
         </div>
 
-        <div className="GlyphDoodle-notes">
+        <div className={styles.textareaPane}>
           <textarea value={state.doodle} onChange={onNotesChange} />
         </div>
       </div>
 
-      <div className="GlyphDoodle-bottom">
-        <div className="GlyphDoodle-keyboard">
-          <GlyphKeyboard shareUrl={shareUrl} onGlyph={c => glyphStream.next(c)} />
+      <div className={styles.bottomArea}>
+        <div className={styles.keyboardPane}>
+          <GlyphKeyboard shareUrl={shareUrl} onGlyph={(c) => glyphStream.next(c)} />
         </div>
 
-        <div className="GlyphDoodle-matches">
+        <div className={styles.suggestionsPane}>
           <ul>
             {state.matches.map((entry, i) => (
               <li key={i}>

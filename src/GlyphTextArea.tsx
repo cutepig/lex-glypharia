@@ -1,5 +1,3 @@
-import "./GlyphTextArea.css";
-
 import React, { useRef, useEffect, useState } from "react";
 import { Observable } from "rxjs";
 
@@ -32,7 +30,7 @@ export const GlyphTextArea: React.FC<IGlyphTextArea> = ({
   });
 
   useEffect(() => {
-    const subscription = glyphStream.subscribe(c => {
+    const subscription = glyphStream.subscribe((c) => {
       const textArea = textAreaRef.current;
       if (!textArea) {
         console.warn("textArea is null");
@@ -54,7 +52,7 @@ export const GlyphTextArea: React.FC<IGlyphTextArea> = ({
       textArea.selectionStart = newSelectionStart;
       textArea.selectionEnd = newSelectionStart;
 
-      dispatch(state => ({
+      dispatch((state) => ({
         ...state,
         selectionStart: newSelectionStart,
         selectionEnd: newSelectionStart,
@@ -85,17 +83,17 @@ export const GlyphTextArea: React.FC<IGlyphTextArea> = ({
           console.warn("textArea is null");
           return;
         }
-        dispatch(state => ({
+        dispatch((state) => ({
           ...state,
           selectionStart: textArea.selectionStart,
           selectionEnd: textArea.selectionEnd,
         }));
       }}
       // Select event
-      onSelect={ev => {
+      onSelect={(ev) => {
         const textArea = ev.currentTarget;
 
-        dispatch(state => ({
+        dispatch((state) => ({
           ...state,
           selectionStart: textArea.selectionStart,
           selectionEnd: textArea.selectionEnd,
@@ -105,7 +103,7 @@ export const GlyphTextArea: React.FC<IGlyphTextArea> = ({
       }}
       ref={textAreaRef}
       // Change event
-      onChange={ev =>
+      onChange={(ev) =>
         onChange(ev.target.value, {
           start: 0,
           end: ev.target.selectionEnd,

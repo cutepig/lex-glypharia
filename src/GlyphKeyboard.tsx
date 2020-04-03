@@ -1,6 +1,7 @@
-import "./GlyphKeyboard.css";
+import styles from "./GlyphKeyboard.module.css";
 
-import React from "react";
+import React, { HTMLAttributes } from "react";
+import { cx } from "emotion";
 import { produce } from "immer";
 import { glyphCategories, glyphMap } from "./glyphMap.json";
 import { useProduce } from "./reactUtils";
@@ -26,7 +27,7 @@ type ActionParameters<F> = F extends (...args: infer A) => any ? A : never;
 
 function actionFor<T>() {
   // F extends (...args: infer A) => (state: T) => T | void>
-  return function<F extends ActionFor<T>>(fn: F) {
+  return function <F extends ActionFor<T>>(fn: F) {
     return (...args: ActionParameters<F>) => (state: T) => {
       return produce(state, fn(...(args as any)));
     };
@@ -34,9 +35,13 @@ function actionFor<T>() {
 }
 
 const keyboardAction = actionFor<IGlyphKeyboardState>();
-const setCurrentPage = keyboardAction((page: GlyphCategory) => state => {
+const setCurrentPage = keyboardAction((page: GlyphCategory) => (state) => {
   state.currentPage = page;
 });
+
+interface IButton extends HTMLAttributes<HTMLButtonElement> {
+  active?: boolean;
+}
 
 export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) => {
   const [state, dispatch] = useProduce<IGlyphKeyboardState>({
@@ -48,12 +53,12 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
 
   return (
     <div className="GlyphKeyboard">
-      <ul className="GlyphKeyboard-controls">
+      <ul className={styles.keymap}>
         <li>
           <button
-            className={state.mode === "keyboard" ? "active" : ""}
+            className={cx(styles.button, state.mode === "keyboard" && styles.buttonActive)}
             onClick={() => {
-              dispatch(draft => {
+              dispatch((draft) => {
                 if (state.isHidden) {
                   draft.isHidden = !state.isHidden;
                 } else if (state.mode === "search") {
@@ -71,9 +76,9 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
           <>
             <li>
               <button
-                className={state.mode === "search" ? "active" : ""}
+                className={cx(styles.button, state.mode === "search" && styles.buttonActive)}
                 onClick={() => {
-                  dispatch(draft => {
+                  dispatch((draft) => {
                     draft.mode = "search";
                   });
                 }}
@@ -84,10 +89,11 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
             <li>
               <input
                 type="search"
-                onKeyDown={ev => {
+                className={styles.input}
+                onKeyDown={(ev) => {
                   console.log("input[type=search]#onKeyDown", ev.keyCode);
                   if (ev.keyCode === 13) {
-                    dispatch(draft => {
+                    dispatch((draft) => {
                       if (state.isHidden) {
                         draft.isHidden = false;
                       }
@@ -95,7 +101,7 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
                     });
                   }
                 }}
-                onChange={ev => {
+                onChange={(ev) => {
                   console.log("input[type=search]#onChange", ev.currentTarget.value);
                   // TODO: Debounce this
                   if (ev.currentTarget.value.length < 2) {
@@ -120,7 +126,7 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
 
                   console.log("entries", entries);
 
-                  dispatch(state => {
+                  dispatch((state) => {
                     state.searchResults = entries;
                   });
                 }}
@@ -131,7 +137,11 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
         {shareUrl && (
           <li>
             <a href={shareUrl} target="_blank" rel="noreferrer noopener">
-              <button>💾</button>
+              <button className={styles.button}>
+                <span role="img" aria-label="Save">
+                  💾
+                </span>
+              </button>
             </a>
           </li>
         )}
@@ -139,11 +149,11 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
 
       {!state.isHidden && state.mode === "keyboard" && (
         <div className="GlyphKeyboard-keyboard">
-          <ul className="GlyphKeyboard-pages">
+          <ul className={styles.keymap}>
             {Object.entries(glyphCategories).map(([key, label]) => (
               <li key={key}>
                 <button
-                  className={state.currentPage === key ? "active" : ""}
+                  className={cx(styles.button, state.currentPage === key && styles.buttonActive)}
                   title={label}
                   onClick={() => dispatch(setCurrentPage(key as GlyphCategory))}
                 >
@@ -153,10 +163,11 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
             ))}
           </ul>
 
-          <ul className="GlyphKeyboard-glyphs">
+          <ul className={styles.keymap}>
             {glyphMap[state.currentPage].map(({ glyph, gardiner, hex, description }) => (
               <li key={gardiner}>
                 <button
+                  className={styles.glyphButton}
                   title={`${gardiner} ${description}`}
                   onClick={() => onGlyph(glyph || String.fromCodePoint(hex))}
                 >
@@ -170,10 +181,11 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
 
       {!state.isHidden && state.mode === "search" && (
         <div className="GlyphKeyboard-search">
-          <ul className="GlyphKeyboard-results">
+          <ul className={styles.keymap}>
             {state.searchResults.map(({ glyph, gardiner, hex, description }) => (
               <li key={gardiner}>
                 <button
+                  className={styles.glyphButton}
                   title={`${gardiner} ${description}`}
                   onClick={() => onGlyph(glyph || String.fromCodePoint(hex))}
                 >
