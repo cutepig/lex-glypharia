@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Lex Glypharia",
+  "name": "Lex Glypharia is an online tool intended to help translating Egyptian hieroglyph texts",
   "icons": [
     {
       "src": "favicon.ico",
