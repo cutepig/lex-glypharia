@@ -33,7 +33,7 @@
 body {
   margin: 0;
   font-size: 16px;
-  font-family: "Noto Sans Egyptian Hieroglyphs", sans-serif;
+  font-family: serif, "Noto Sans Egyptian Hieroglyphs";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

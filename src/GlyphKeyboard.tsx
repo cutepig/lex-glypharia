@@ -45,7 +45,7 @@ interface IButton extends HTMLAttributes<HTMLButtonElement> {
 
 export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) => {
   const [state, dispatch] = useProduce<IGlyphKeyboardState>({
-    isHidden: true,
+    isHidden: false,
     mode: "keyboard",
     currentPage: "A",
     searchResults: [],
@@ -69,7 +69,9 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
               });
             }}
           >
-            ⌨
+            <span role="img" aria-label="Keyboard">
+              ⌨
+            </span>
           </button>
         </li>
         {!state.isHidden && (
@@ -83,7 +85,9 @@ export const GlyphKeyboard: React.FC<IGlyphKeyboard> = ({ shareUrl, onGlyph }) =
                   });
                 }}
               >
-                🔍
+                <span role="img" aria-label="Search">
+                  🔍
+                </span>
               </button>
             </li>
             <li>
