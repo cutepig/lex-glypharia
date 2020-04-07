@@ -6,7 +6,8 @@ import { GlyphKeyboard } from "./GlyphKeyboard";
 import { Subject } from "rxjs";
 import { IGlyphTextArea, GlyphTextArea } from "./GlyphTextArea";
 import { useProduce } from "./reactUtils";
-import dictionaryJSON from "./dictionary.json";
+
+const dictionaryJSON = require("./dictionary.json");
 
 interface IDictionaryEntry {
   transliteration: string;
