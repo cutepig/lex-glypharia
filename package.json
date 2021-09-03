@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "emotion": "10.0.27",
-    "immer": "5.0.0",
+    "immer": "9.0.6",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "rxjs": "6.5.5"
