@@ -45,7 +45,7 @@
     "@types/react-dom": "16.9.6",
     "cheerio": "1.0.0-rc.3",
     "csv-parse": "4.8.8",
-    "node-fetch": "2.6.0",
+    "node-fetch": "2.6.7",
     "react-scripts": "3.4.1",
     "typescript": "3.8.3"
   }
